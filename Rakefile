@@ -22,7 +22,7 @@ spec = Gem::Specification.new do |s|
   s.email = 'joe.g.yates@gmail.com'
 
   s.files = ['README', 'COPYING', 'Rakefile'] + FileList['{lib,test}/**/*.rb']
-  s.require_paths = 'lib'
+  s.require_paths = ['lib']
 
   s.has_rdoc = true
   s.rdoc_options += RDOC_OPTS
