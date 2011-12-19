@@ -37,6 +37,7 @@ module SunTimes
 
   DEFAULT_ZENITH = 90.83333
   KNOWN_EVENTS = [:rise, :set]
+  DEGREES_PER_HOUR = 360.0 / 24.0
 
   # Helper method: calculates sunrise, with the same parameters as calculate
   def SunTimes.rise(date, latitude, longitude, options = {})
@@ -65,7 +66,7 @@ module SunTimes
     zenith = options.delete(:zenith) || DEFAULT_ZENITH
 
     # lngHour
-    longitude_hour = longitude / 15.0
+    longitude_hour = longitude / DEGREES_PER_HOUR
 
     # t
     base_time = event == :rise ? 6.0 : 18.0
@@ -92,7 +93,7 @@ module SunTimes
     sun_right_ascension += (sun_true_longitude_quadrant - sun_right_ascension_quadrant)
 
     # RA = RA / 15
-    sun_right_ascension_hours = sun_right_ascension / 15.0
+    sun_right_ascension_hours = sun_right_ascension / DEGREES_PER_HOUR
 
     sin_declination = 0.39782 * Math.sin(degrees_to_radians(sun_true_longitude))
     cos_declination = Math.cos(Math.asin(sin_declination))
@@ -115,7 +116,7 @@ module SunTimes
       end
 
     # H = H / 15
-    suns_local_hour_hours = suns_local_hour / 15.0
+    suns_local_hour_hours = suns_local_hour / DEGREES_PER_HOUR
 
     # T = H + RA - (0.06571 * t) - 6.622
     local_mean_time = suns_local_hour_hours + sun_right_ascension_hours - (0.06571 * approximate_time) - 6.622
