@@ -31,10 +31,10 @@ module SunTimes
     MAJOR = 0
     MINOR = 1
     TINY = 1
- 
+
     STRING = [MAJOR, MINOR, TINY].join('.')
   end
- 
+
   DEFAULT_ZENITH = 90.83333
   KNOWN_EVENTS = [:rise, :set]
 
@@ -85,7 +85,7 @@ module SunTimes
     tan_right_ascension = 0.91764 * Math.tan(degrees_to_radians(sun_true_longitude))
     sun_right_ascension = radians_to_degrees(Math.atan(tan_right_ascension))
     sun_right_ascension = coerce_degrees(sun_right_ascension)
- 
+
     # right ascension value needs to be in the same quadrant as L
     sun_true_longitude_quadrant  = (sun_true_longitude  / 90.0).floor * 90.0
     sun_right_ascension_quadrant = (sun_right_ascension / 90.0).floor * 90.0
@@ -99,7 +99,7 @@ module SunTimes
 
     cos_local_hour_angle =
       (Math.cos(degrees_to_radians(zenith)) - (sin_declination * Math.sin(degrees_to_radians(latitude)))) /
-                                 (cos_declination * Math.cos(degrees_to_radians(latitude)))
+      (cos_declination * Math.cos(degrees_to_radians(latitude)))
 
     # the sun never rises on this location (on the specified date)
     return nil if cos_local_hour_angle > 1
@@ -112,7 +112,7 @@ module SunTimes
         360 - radians_to_degrees(Math.acos(cos_local_hour_angle))
       else
         radians_to_degrees(Math.acos(cos_local_hour_angle))
-      end  
+      end
 
     # H = H / 15
     suns_local_hour_hours = suns_local_hour / 15.0
@@ -138,7 +138,7 @@ module SunTimes
   def SunTimes.degrees_to_radians(d)
     d.to_f / 360.0 * 2.0 * Math::PI
   end
-    
+
   def SunTimes.radians_to_degrees(r)
     r.to_f * 360.0 / (2.0 * Math::PI)
   end
