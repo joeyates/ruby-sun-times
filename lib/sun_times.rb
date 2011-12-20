@@ -30,7 +30,7 @@ module SunTimes
   module VERSION #:nodoc:
     MAJOR = 0
     MINOR = 1
-    TINY = 1
+    TINY  = 2
 
     STRING = [MAJOR, MINOR, TINY].join('.')
   end
@@ -125,6 +125,26 @@ module SunTimes
     gmt_hours = local_mean_time - longitude_hour
     gmt_hours -= 24.0 if gmt_hours > 24
     gmt_hours += 24.0 if gmt_hours <  0
+
+    case
+    when date.respond_to?( :offset )
+      offset_hours = date.offset * 24
+    when date.respond_to?( :gmt_offset )
+      offset_hours = date.gmt_offset / 3600
+    else
+      offset_hours = nil
+    end
+
+    if ! offset_hours.nil?
+      if gmt_hours + offset_hours < 0
+        next_day = Date.new(date.year, date.month, date.day + 1)
+        return calculate(event, next_day, latitude, longitude, options = {})
+      end
+      if gmt_hours + offset_hours > 24
+        previous_day = Date.new(date.year, date.month, date.day + 1)
+        return calculate(event, previous_day, latitude, longitude, options = {})
+      end
+    end
 
     hour = gmt_hours.floor
     hour_remainder = (gmt_hours.to_f - hour.to_f) * 60.0

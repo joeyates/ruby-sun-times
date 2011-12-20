@@ -49,4 +49,12 @@ class SunTimesTest < Test::Unit::TestCase
     assert_equal(Time.gm(2010, 6, 13, 18, 56, 55), set)
   end
 
+  def test_respects_timezone_if_supplied
+    pst = DateTime.new(2011, 12, 13, 0, 0, 0, Rational(-8, 24))
+    set = SunTimes.calculate(:set, pst, 45.52, -122.681944)
+    result_datetime = DateTime.new(set.year, set.month, set.day, set.hour, set.min, set.sec, 0)
+    assert(pst < result_datetime)
+    assert(pst + 1 > result_datetime)
+  end
+
 end
