@@ -1,5 +1,7 @@
 == SunTimes
 
+*this is a Fork of [joeyates/ruby-sun-times](https://github.com/joeyates/ruby-sun-times) and is avalible as [sun-times gem](https://rubygems.org/gems/sun-times) so there is no explicit `require` necessary in rails projects*
+
 Calculates sunrise and sunset times.
 
 An implementation of the algorithm descibed at http://williams.best.vwh.net/sunrise_sunset_algorithm.htm
