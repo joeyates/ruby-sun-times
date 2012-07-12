@@ -1,20 +1,20 @@
-== SunTimes
+# SunTimes
 
-*this is a Fork of [joeyates/ruby-sun-times](https://github.com/joeyates/ruby-sun-times) and is avalible as [sun-times gem](https://rubygems.org/gems/sun-times) so there is no explicit `require` necessary in rails projects*
+* this is a Fork of [joeyates/ruby-sun-times](https://github.com/joeyates/ruby-sun-times) and is avalible as [sun-times gem](https://rubygems.org/gems/sun-times) so there is no explicit `require` necessary in rails projects *
 
 Calculates sunrise and sunset times.
 
-An implementation of the algorithm descibed at http://williams.best.vwh.net/sunrise_sunset_algorithm.htm
+An implementation of the algorithm described at http://williams.best.vwh.net/sunrise_sunset_algorithm.htm
 
-== References
+## References
 
 * http://www.astro.uu.nl/~strous/AA/en/reken/zonpositie.html - Calculations
 * http://williams.best.vwh.net/sunrise_sunset_algorithm.htm - Algorithm
 * http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/264573 - Ken Bloom's implementation
 
-== Licence
+## Licence
 
-This code is free to use under the terms of the MIT licence:
+This code is free to use under the terms of the MIT license:
 
   Copyright (c) 2010 Joe Yates
 
