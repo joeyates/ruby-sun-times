@@ -10,11 +10,11 @@ Gem::Specification.new do |s|
   s.author = ['Joe Yates', 'Timo Schilling']
   s.email = ['joe.g.yates@gmail.com', 'timo@schilling.io']
 
-  s.files = ['README', 'COPYING', 'Rakefile'] + Dir['{lib,test}/**/*.rb']
+  s.files = ['README.md', 'COPYING', 'Rakefile'] + Dir['{lib,test}/**/*.rb']
   s.require_paths = ['lib']
 
   s.has_rdoc = true
-  s.extra_rdoc_files = ['README', 'COPYING']
+  s.extra_rdoc_files = ['README.md', 'COPYING']
 
   s.test_file = 'test/test_all.rb'
 end
