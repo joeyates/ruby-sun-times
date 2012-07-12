@@ -1,4 +1,5 @@
 # SunTimes
+[![Build Status](https://secure.travis-ci.org/timoschilling/sun-times.png?branch=master)](http://travis-ci.org/timoschilling/sun-times)
 
 * this is a Fork of [joeyates/ruby-sun-times](https://github.com/joeyates/ruby-sun-times) and is avalible as [sun-times gem](https://rubygems.org/gems/sun-times) so there is no explicit `require` necessary in rails projects *
 
