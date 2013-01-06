@@ -4,7 +4,9 @@ rvm:
   - 1.9.3
   - rbx-19mode
   - ruby-head
+  - jruby
 matrix:
   allow_failures:
     - rvm: rbx-19mode
     - rvm: ruby-head
+    - rvm: jruby
