@@ -22,9 +22,12 @@ Or install it yourself as:
     $ gem install sun-times
 
 ## Usage
-
-    SunTimes.rise(Date.new(2010, 3, 8), 51.506318, 7.460659)
-    SunTimes.set(Date.new(2010, 3, 8), 51.506318, 7.460659)
+```ruby
+SunTimes.rise(Date.new(2010, 3, 8), 51.506318, 7.460659)             # => 2010-03-08 06:01:02 UTC
+SunTimes.calculate(:set, Date.new(2010, 3, 8), 51.506318, 7.460659)  # => 2010-03-08 06:01:02 UTC
+SunTimes.set(Date.new(2010, 3, 8), 51.506318, 7.460659)              # => 2010-03-08 17:22:07 UTC
+SunTimes.calculate(:set, Date.new(2010, 3, 8), 51.506318, 7.460659)  # => 2010-03-08 17:22:07 UTC
+```
 
 ## Contributing
 
