@@ -103,9 +103,9 @@ module SunTimes
       (cos_declination * Math.cos(degrees_to_radians(latitude)))
 
     # the sun never rises on this location (on the specified date)
-    return nil if cos_local_hour_angle > 1
+    return :never_rise if cos_local_hour_angle > 1
     # the sun never sets on this location (on the specified date)
-    return nil if cos_local_hour_angle < -1
+    return :never_set if cos_local_hour_angle < -1
 
     # H
     suns_local_hour =
