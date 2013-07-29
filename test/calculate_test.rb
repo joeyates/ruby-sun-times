@@ -33,6 +33,11 @@ class SunTimesTest < Test::Unit::TestCase
     assert_nil(set)
   end
 
+  def test_last_day_of_month
+    date = Date.new(2013,07,31)
+    assert_not_raise { SunTimes.set(date, 50,50) }
+  end
+
   def test_unknown_event
     assert_raise(RuntimeError) { SunTimes.calculate(:foo, Date.new(2010, 3, 8), 43.779, 11.432) }
   end
