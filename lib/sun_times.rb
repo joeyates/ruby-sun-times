@@ -141,7 +141,7 @@ module SunTimes
         return calculate(event, next_day, latitude, longitude, options = {})
       end
       if gmt_hours + offset_hours > 24
-        previous_day = Date.new(date.year, date.month, date.day) + 1
+        previous_day = Date.new(date.year, date.month, date.day) - 1
         return calculate(event, previous_day, latitude, longitude, options = {})
       end
     end
