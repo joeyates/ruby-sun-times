@@ -103,9 +103,9 @@ module SunTimes
       (cos_declination * Math.cos(degrees_to_radians(latitude)))
 
     # the sun never rises on this location (on the specified date)
-    return nil if cos_local_hour_angle > 1
+    return :never_rise if cos_local_hour_angle > 1
     # the sun never sets on this location (on the specified date)
-    return nil if cos_local_hour_angle < -1
+    return :never_set if cos_local_hour_angle < -1
 
     # H
     suns_local_hour =
@@ -137,11 +137,11 @@ module SunTimes
 
     if ! offset_hours.nil?
       if gmt_hours + offset_hours < 0
-        next_day = Date.new(date.year, date.month, date.day + 1)
+        next_day = Date.new(date.year, date.month, date.day ) + 1
         return calculate(event, next_day, latitude, longitude, options = {})
       end
       if gmt_hours + offset_hours > 24
-        previous_day = Date.new(date.year, date.month, date.day + 1)
+        previous_day = Date.new(date.year, date.month, date.day) - 1
         return calculate(event, previous_day, latitude, longitude, options = {})
       end
     end
