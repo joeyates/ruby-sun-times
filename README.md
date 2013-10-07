@@ -42,3 +42,7 @@ SunTimes.calculate(:set, Date.new(2010, 3, 8), 51.506318, 7.460659)  # => 2010-0
 * http://www.astro.uu.nl/~strous/AA/en/reken/zonpositie.html - Calculations
 * http://williams.best.vwh.net/sunrise_sunset_algorithm.htm - Algorithm
 * http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/264573 - Ken Bloom's implementation
+
+## License
+
+MIT License (see [LICENSE.txt](./LICENSE.txt))
