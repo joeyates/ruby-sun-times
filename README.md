@@ -1,20 +1,20 @@
-== SunTimes
+# SunTimes
 
 Calculates sunrise and sunset times.
 
 An implementation of the algorithm descibed at http://williams.best.vwh.net/sunrise_sunset_algorithm.htm
 
-== References
+# References
 
 * http://www.astro.uu.nl/~strous/AA/en/reken/zonpositie.html - Calculations
 * http://williams.best.vwh.net/sunrise_sunset_algorithm.htm - Algorithm
 * http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/264573 - Ken Bloom's implementation
 
-== Licence
+# Licence
 
 This code is free to use under the terms of the MIT licence:
 
-  Copyright (c) 2010 Joe Yates
+  Copyright (c) 2010 - 2013 Joe Yates
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
