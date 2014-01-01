@@ -26,15 +26,6 @@
 require 'date'
 
 module SunTimes
-
-  module VERSION #:nodoc:
-    MAJOR = 0
-    MINOR = 1
-    TINY  = 2
-
-    STRING = [MAJOR, MINOR, TINY].join('.')
-  end
-
   DEFAULT_ZENITH = 90.83333
   KNOWN_EVENTS = [:rise, :set]
   DEGREES_PER_HOUR = 360.0 / 24.0
