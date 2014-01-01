@@ -31,12 +31,12 @@ module SunTimes
   DEGREES_PER_HOUR = 360.0 / 24.0
 
   # Helper method: calculates sunrise, with the same parameters as calculate
-  def SunTimes.rise(date, latitude, longitude, options = {})
+  def self.rise(date, latitude, longitude, options = {})
     calculate(:rise, date, latitude, longitude, options)
   end
 
   # Helper method: calculates sunset, with the same parameters as calculate
-  def SunTimes.set(date, latitude, longitude, options = {})
+  def self.set(date, latitude, longitude, options = {})
     calculate(:set, date, latitude, longitude, options)
   end
 
@@ -52,7 +52,7 @@ module SunTimes
   # ==== Example
   #   SunTimes.calculate(:rise, Date.new(2010, 3, 8), 43.779, 11.432)
   #   > Mon Mar 08 05:39:53 UTC 2010
-  def SunTimes.calculate(event, date, latitude, longitude, options = {})
+  def self.calculate(event, date, latitude, longitude, options = {})
     datetime = date.to_datetime
     raise "Unknown event '#{ event }'" if KNOWN_EVENTS.find_index(event).nil?
     zenith = options.delete(:zenith) || DEFAULT_ZENITH
@@ -139,15 +139,15 @@ module SunTimes
 
   private
 
-  def SunTimes.degrees_to_radians(d)
+  def self.degrees_to_radians(d)
     d.to_f / 360.0 * 2.0 * Math::PI
   end
 
-  def SunTimes.radians_to_degrees(r)
+  def self.radians_to_degrees(r)
     r.to_f * 360.0 / (2.0 * Math::PI)
   end
 
-  def SunTimes.coerce_degrees(d)
+  def self.coerce_degrees(d)
     if d < 0
       d += 360
       return coerce_degrees(d)
@@ -158,5 +158,4 @@ module SunTimes
     end
     d
   end
-
 end
