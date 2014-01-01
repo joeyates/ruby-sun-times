@@ -4,6 +4,33 @@ Calculates sunrise and sunset times.
 
 An implementation of the algorithm descibed at http://williams.best.vwh.net/sunrise_sunset_algorithm.htm
 
+# Usage
+
+## Requiring
+
+In a Gemfile/Gemspec:
+
+```
+gem 'ruby-sun-times', require: 'sun_times'
+```
+
+Directly:
+
+```ruby
+require 'sun_times'
+```
+
+## Calls
+
+There are two helper methods: 'rise' and 'set'.
+
+```
+day = Date.new(2010, 3, 8)
+latitude = 43.779
+longitude = 11.432
+puts SunTimes.set(day, latitude, longitude)
+```
+
 # References
 
 * http://www.astro.uu.nl/~strous/AA/en/reken/zonpositie.html - Calculations
