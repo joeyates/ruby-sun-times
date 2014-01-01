@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.unshift(File.expand_path('../lib/', __FILE__))
 
-require 'rake'
 require 'sun_times/version'
 
 Gem::Specification.new do |s|
@@ -9,14 +8,15 @@ Gem::Specification.new do |s|
   s.summary = 'Module which calculates sunrise and sunset times'
   s.version = SunTimes::VERSION::STRING
 
-  s.homepage = 'http://github.com/joeyates/ruby-sun-times'
+  s.homepage = 'https://github.com/joeyates/ruby-sun-times'
   s.author = 'Joe Yates'
   s.email = 'joe.g.yates@gmail.com'
 
-  s.files = ['README', 'COPYING', 'Rakefile'] + Rake::FileList['{lib,test}/**/*.rb']
+  s.files = `git ls-files`.split($\)
+  s.executables = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  s.test_files = s.files.grep(%r{^spec/})
   s.require_paths = ['lib']
 
-  s.extra_rdoc_files = ['README', 'COPYING']
-
-  s.test_file = 'test/test_all.rb'
+  s.add_development_dependency 'pry'
+  s.add_development_dependency 'rspec'
 end
