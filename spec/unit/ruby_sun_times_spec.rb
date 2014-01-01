@@ -6,6 +6,10 @@ describe SunTimes do
   let(:longitude) { 11.432 }
   let(:rise) { Time.gm(2010, 3, 8, 5, 39, 53) }
   let(:set) { Time.gm(2010, 3, 8, 17, 11, 16) }
+  let(:midsummer) { Date.new(2010, 6, 21) }
+  let(:midwinter) { Date.new(2010, 12, 21) }
+  let(:north_cape_latitude) { 71.170219 }
+  let(:north_cape_longitude) { 25.785556 }
 
   describe '#calculate' do
     context ':rise' do
@@ -44,18 +48,13 @@ describe SunTimes do
     end
 
     context 'midnight sun' do
-      # North Cape
-      let(:midsummer) { Date.new(2010, 6, 21) }
-      let(:latitude) { 71.170219 }
-      let(:longitude) { 25.785556 }
-
       it 'rise is nil' do
-        result = SunTimes.calculate(:rise, midsummer, latitude, longitude)
+        result = SunTimes.calculate(:rise, midsummer, north_cape_latitude, north_cape_longitude)
         expect(result).to be_nil
       end
 
       it 'set is nil' do
-        result = SunTimes.calculate(:set, midsummer, latitude, longitude)
+        result = SunTimes.calculate(:set, midsummer, north_cape_latitude, north_cape_longitude)
         expect(result).to be_nil
       end
     end
@@ -66,6 +65,22 @@ describe SunTimes do
 
       it 'calculates correctly' do
         SunTimes.calculate(:set, day, 47.5, -122)
+      end
+    end
+
+    context 'options' do
+      context ':never_rises_result' do
+        it 'uses the supplied value, instead of nil' do
+          result = SunTimes.calculate(:rise, midwinter, north_cape_latitude, north_cape_longitude, {:never_rises_result => :never_rises})
+          expect(result).to eq(:never_rises)
+        end
+      end
+
+      context ':never_sets_result' do
+        it 'uses the supplied value, instead of nil' do
+          result = SunTimes.calculate(:rise, midsummer, north_cape_latitude, north_cape_longitude, {:never_sets_result => :never_sets})
+          expect(result).to eq(:never_sets)
+        end
       end
     end
   end

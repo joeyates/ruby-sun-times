@@ -47,15 +47,22 @@ module SunTimes
   # * +date+ - An object that responds to :to_datetime.
   # * +latitude+ - The latitude of the location in degrees.
   # * +longitude+ - The longitude of the location in degrees.
-  # * +options+ - Additional option is <tt>:zenith</tt>.
+  # * +options+ -
+  #   * <tt>:never_rises_result</tt> - the value to be returned if the sun never rises on the supplied date,
+  #   * <tt>:never_sets_result</tt> - the value to be returned if the sun never sets on the supplied date,
+  #   * <tt>:zenith</tt> - default 90.83333
   #
   # ==== Example
   #   SunTimes.calculate(:rise, Date.new(2010, 3, 8), 43.779, 11.432)
   #   > Mon Mar 08 05:39:53 UTC 2010
   def self.calculate(event, date, latitude, longitude, options = {})
+    options = {
+      :never_sets_result  => nil,
+      :never_rises_result => nil,
+      :zenith             => DEFAULT_ZENITH,
+    }.merge(options)
     datetime = date.to_datetime
     raise "Unknown event '#{ event }'" if KNOWN_EVENTS.find_index(event).nil?
-    zenith = options.delete(:zenith) || DEFAULT_ZENITH
 
     # lngHour
     longitude_hour = longitude / DEGREES_PER_HOUR
@@ -91,13 +98,13 @@ module SunTimes
     cos_declination = Math.cos(Math.asin(sin_declination))
 
     cos_local_hour_angle =
-      (Math.cos(degrees_to_radians(zenith)) - (sin_declination * Math.sin(degrees_to_radians(latitude)))) /
+      (Math.cos(degrees_to_radians(options[:zenith])) - (sin_declination * Math.sin(degrees_to_radians(latitude)))) /
       (cos_declination * Math.cos(degrees_to_radians(latitude)))
 
     # the sun never rises on this location (on the specified date)
-    return nil if cos_local_hour_angle > 1
+    return options[:never_rises_result] if cos_local_hour_angle > 1
     # the sun never sets on this location (on the specified date)
-    return nil if cos_local_hour_angle < -1
+    return options[:never_sets_result] if cos_local_hour_angle < -1
 
     # H
     suns_local_hour =
