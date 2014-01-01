@@ -44,7 +44,7 @@ module SunTimes
   #
   # ==== Parameters
   # * +event+ - One of :rise, :set.
-  # * +date+ - An object that responds to yday.
+  # * +date+ - An object that responds to :to_datetime.
   # * +latitude+ - The latitude of the location in degrees.
   # * +longitude+ - The longitude of the location in degrees.
   # * +options+ - Additional option is <tt>:zenith</tt>.
@@ -53,6 +53,7 @@ module SunTimes
   #   SunTimes.calculate(:rise, Date.new(2010, 3, 8), 43.779, 11.432)
   #   > Mon Mar 08 05:39:53 UTC 2010
   def SunTimes.calculate(event, date, latitude, longitude, options = {})
+    datetime = date.to_datetime
     raise "Unknown event '#{ event }'" if KNOWN_EVENTS.find_index(event).nil?
     zenith = options.delete(:zenith) || DEFAULT_ZENITH
 
@@ -61,7 +62,7 @@ module SunTimes
 
     # t
     base_time = event == :rise ? 6.0 : 18.0
-    approximate_time = date.yday + (base_time - longitude_hour) / 24.0
+    approximate_time = datetime.yday + (base_time - longitude_hour) / 24.0
 
     # M
     mean_sun_anomaly = (0.9856 * approximate_time) - 3.289
@@ -117,24 +118,15 @@ module SunTimes
     gmt_hours -= 24.0 if gmt_hours > 24
     gmt_hours += 24.0 if gmt_hours <  0
 
-    case
-    when date.respond_to?( :offset )
-      offset_hours = date.offset * 24
-    when date.respond_to?( :gmt_offset )
-      offset_hours = date.gmt_offset / 3600
-    else
-      offset_hours = nil
-    end
+    offset_hours = datetime.offset * 24.0
 
-    if ! offset_hours.nil?
-      if gmt_hours + offset_hours < 0
-        next_day = Date.new(date.year, date.month, date.day + 1)
-        return calculate(event, next_day, latitude, longitude, options = {})
-      end
-      if gmt_hours + offset_hours > 24
-        previous_day = Date.new(date.year, date.month, date.day + 1)
-        return calculate(event, previous_day, latitude, longitude, options = {})
-      end
+    if gmt_hours + offset_hours < 0
+      next_day = datetime.next_day
+      return calculate(event, next_day.new_offset, latitude, longitude, options = {})
+    end
+    if gmt_hours + offset_hours > 24
+      previous_day = datetime.prev_day
+      return calculate(event, previous_day.new_offset, latitude, longitude, options = {})
     end
 
     hour = gmt_hours.floor
@@ -142,7 +134,7 @@ module SunTimes
     minute = hour_remainder.floor
     seconds = (hour_remainder - minute) * 60.0
 
-    Time.gm(date.year, date.month, date.day, hour, minute, seconds)
+    Time.gm(datetime.year, datetime.month, datetime.day, hour, minute, seconds)
   end
 
   private

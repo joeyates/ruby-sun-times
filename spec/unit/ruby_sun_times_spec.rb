@@ -59,6 +59,16 @@ describe SunTimes do
         expect(result).to be_nil
       end
     end
+
+    context 'last day of the year' do
+      let(:zone) { Rational(-8, 24) }
+      let(:day) { DateTime.new(2013, 12, 31, 8, 59, 5, zone) }
+
+      it 'calculates correctly' do
+        result = SunTimes.calculate(:set, day, 47.5, -122)
+        puts "result: #{result}"
+      end
+    end
   end
 
   describe '#rise' do
