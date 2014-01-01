@@ -65,8 +65,7 @@ describe SunTimes do
       let(:day) { DateTime.new(2013, 12, 31, 8, 59, 5, zone) }
 
       it 'calculates correctly' do
-        result = SunTimes.calculate(:set, day, 47.5, -122)
-        puts "result: #{result}"
+        SunTimes.calculate(:set, day, 47.5, -122)
       end
     end
   end
