@@ -88,7 +88,12 @@ class SunTimes
     longitude_hour = longitude / DEGREES_PER_HOUR
 
     # t
-    base_time = event == :rise ? 6.0 : 18.0
+    base_time =
+      if event == :rise
+        6.0
+      else
+        18.0
+      end
     approximate_time = datetime.yday + (base_time - longitude_hour) / 24.0
 
     # M
