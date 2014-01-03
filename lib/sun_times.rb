@@ -82,7 +82,7 @@ class SunTimes
   #   > Mon Mar 08 05:39:53 UTC 2010
   def calculate(event, date, latitude, longitude)
     datetime = date.to_datetime
-    raise "Unknown event '#{ event }'" if KNOWN_EVENTS.find_index(event).nil?
+    raise "Unknown event '#{event}'" unless KNOWN_EVENTS.include?(event)
 
     # lngHour
     longitude_hour = longitude / DEGREES_PER_HOUR
