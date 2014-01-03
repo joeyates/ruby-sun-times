@@ -59,27 +59,27 @@ class SunTimes
     }.merge(options)
   end
 
-  # Helper method: calculates sunrise, with the same parameters as calculate
-  def rise(date, latitude, longitude)
-    calculate(:rise, date, latitude, longitude)
-  end
-
-  # Helper method: calculates sunset, with the same parameters as calculate
-  def set(date, latitude, longitude)
-    calculate(:set, date, latitude, longitude)
-  end
-
-  # Calculates the sunrise or sunset time for a specific date and location
+  # Calculates the sunrise time for a specific date and location
   #
   # ==== Parameters
-  # * +event+ - One of :rise, :set.
   # * +date+ - An object that responds to :to_datetime.
   # * +latitude+ - The latitude of the location in degrees.
   # * +longitude+ - The longitude of the location in degrees.
   #
   # ==== Example
-  #   SunTimes.calculate(:rise, Date.new(2010, 3, 8), 43.779, 11.432)
+  #   SunTimes.new.calculate(:rise, Date.new(2010, 3, 8), 43.779, 11.432)
   #   > Mon Mar 08 05:39:53 UTC 2010
+  def rise(date, latitude, longitude)
+    calculate(:rise, date, latitude, longitude)
+  end
+
+  # calculates sunset, see #rise for parameters
+  def set(date, latitude, longitude)
+    calculate(:set, date, latitude, longitude)
+  end
+
+  private
+
   def calculate(event, date, latitude, longitude)
     datetime = date.to_datetime
     raise "Unknown event '#{event}'" unless KNOWN_EVENTS.include?(event)
