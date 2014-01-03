@@ -25,19 +25,48 @@
 
 require 'date'
 
-module SunTimes
+class SunTimes
   DEFAULT_ZENITH = 90.83333
   KNOWN_EVENTS = [:rise, :set]
   DEGREES_PER_HOUR = 360.0 / 24.0
 
-  # Helper method: calculates sunrise, with the same parameters as calculate
+  attr_reader :options
+
+  # Deprecated: use SunTimes.new.rise(...)
   def self.rise(date, latitude, longitude, options = {})
     calculate(:rise, date, latitude, longitude, options)
   end
 
-  # Helper method: calculates sunset, with the same parameters as calculate
+  # Deprecated: use SunTimes.new.set(...)
   def self.set(date, latitude, longitude, options = {})
     calculate(:set, date, latitude, longitude, options)
+  end
+
+  # Deprecated: use SunTimes.new.calculate(...)
+  def self.calculate(event, date, latitude, longitude, options = {})
+    new(options).calculate(event, date, latitude, longitude)
+  end
+
+  # * +options+ -
+  #   * <tt>:never_rises_result</tt> - the value to be returned if the sun never rises on the supplied date,
+  #   * <tt>:never_sets_result</tt> - the value to be returned if the sun never sets on the supplied date,
+  #   * <tt>:zenith</tt> - default 90.83333
+  def initialize(options = {})
+    @options = {
+      :never_sets_result  => nil,
+      :never_rises_result => nil,
+      :zenith             => DEFAULT_ZENITH,
+    }.merge(options)
+  end
+
+  # Helper method: calculates sunrise, with the same parameters as calculate
+  def rise(date, latitude, longitude)
+    calculate(:rise, date, latitude, longitude)
+  end
+
+  # Helper method: calculates sunset, with the same parameters as calculate
+  def set(date, latitude, longitude)
+    calculate(:set, date, latitude, longitude)
   end
 
   # Calculates the sunrise or sunset time for a specific date and location
@@ -47,20 +76,11 @@ module SunTimes
   # * +date+ - An object that responds to :to_datetime.
   # * +latitude+ - The latitude of the location in degrees.
   # * +longitude+ - The longitude of the location in degrees.
-  # * +options+ -
-  #   * <tt>:never_rises_result</tt> - the value to be returned if the sun never rises on the supplied date,
-  #   * <tt>:never_sets_result</tt> - the value to be returned if the sun never sets on the supplied date,
-  #   * <tt>:zenith</tt> - default 90.83333
   #
   # ==== Example
   #   SunTimes.calculate(:rise, Date.new(2010, 3, 8), 43.779, 11.432)
   #   > Mon Mar 08 05:39:53 UTC 2010
-  def self.calculate(event, date, latitude, longitude, options = {})
-    options = {
-      :never_sets_result  => nil,
-      :never_rises_result => nil,
-      :zenith             => DEFAULT_ZENITH,
-    }.merge(options)
+  def calculate(event, date, latitude, longitude)
     datetime = date.to_datetime
     raise "Unknown event '#{ event }'" if KNOWN_EVENTS.find_index(event).nil?
 
@@ -129,11 +149,11 @@ module SunTimes
 
     if gmt_hours + offset_hours < 0
       next_day = datetime.next_day
-      return calculate(event, next_day.new_offset, latitude, longitude, options = {})
+      return calculate(event, next_day.new_offset, latitude, longitude)
     end
     if gmt_hours + offset_hours > 24
       previous_day = datetime.prev_day
-      return calculate(event, previous_day.new_offset, latitude, longitude, options = {})
+      return calculate(event, previous_day.new_offset, latitude, longitude)
     end
 
     hour = gmt_hours.floor
@@ -146,15 +166,15 @@ module SunTimes
 
   private
 
-  def self.degrees_to_radians(d)
+  def degrees_to_radians(d)
     d.to_f / 360.0 * 2.0 * Math::PI
   end
 
-  def self.radians_to_degrees(r)
+  def radians_to_degrees(r)
     r.to_f * 360.0 / (2.0 * Math::PI)
   end
 
-  def self.coerce_degrees(d)
+  def coerce_degrees(d)
     if d < 0
       d += 360
       return coerce_degrees(d)
