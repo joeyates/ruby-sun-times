@@ -42,7 +42,7 @@ class SunTimes
     calculate(:set, date, latitude, longitude, options)
   end
 
-  # Deprecated: use SunTimes.new.calculate(...)
+  # Deprecated: use SunTimes.new.rise/set(...)
   def self.calculate(event, date, latitude, longitude, options = {})
     new(options).calculate(event, date, latitude, longitude)
   end
