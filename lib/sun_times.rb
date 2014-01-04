@@ -67,7 +67,7 @@ class SunTimes
   # * +longitude+ - The longitude of the location in degrees.
   #
   # ==== Example
-  #   SunTimes.new.calculate(:rise, Date.new(2010, 3, 8), 43.779, 11.432)
+  #   SunTimes.new.rise(Date.new(2010, 3, 8), 43.779, 11.432)
   #   > Mon Mar 08 05:39:53 UTC 2010
   def rise(date, latitude, longitude)
     calculate(:rise, date, latitude, longitude)
