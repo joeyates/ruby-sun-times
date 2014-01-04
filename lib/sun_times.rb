@@ -81,7 +81,7 @@ class SunTimes
   private
 
   def calculate(event, date, latitude, longitude)
-    datetime = date.to_datetime
+    datetime = to_datetime(date)
     raise "Unknown event '#{event}'" unless KNOWN_EVENTS.include?(event)
 
     # lngHour
@@ -153,11 +153,11 @@ class SunTimes
     offset_hours = datetime.offset * 24.0
 
     if gmt_hours + offset_hours < 0
-      next_day = datetime.next_day
+      next_day = next_day(datetime)
       return calculate(event, next_day.new_offset, latitude, longitude)
     end
     if gmt_hours + offset_hours > 24
-      previous_day = datetime.prev_day
+      previous_day = prev_day(datetime)
       return calculate(event, previous_day.new_offset, latitude, longitude)
     end
 
@@ -169,7 +169,39 @@ class SunTimes
     Time.gm(datetime.year, datetime.month, datetime.day, hour, minute, seconds)
   end
 
-  private
+  ############################
+  # ruby 1.8 compatibility
+
+  def to_datetime(date)
+    if date.respond_to?(:to_datetime)
+      date.to_datetime
+    else
+      values = [
+        date.year,
+        date.month,
+        date.day,
+      ]
+      [:hour, :minute, :second, :zone].each do |m|
+        values <<
+          if date.respond_to?(m)
+            date.send(m)
+          else
+            0
+          end
+      end
+      DateTime.new(*values)
+    end
+  end
+
+  def prev_day(datetime)
+    datetime - 1
+  end
+
+  def next_day(datetime)
+    datetime + 1
+  end
+
+  ############################
 
   def degrees_to_radians(d)
     d.to_f / 360.0 * 2.0 * Math::PI
