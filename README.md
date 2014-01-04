@@ -1,4 +1,4 @@
-# ruby-sun-times [![Build Status](https://secure.travis-ci.org/joeyates/ruby-run-times.png)][Continuous Integration]
+# ruby-sun-times [![Build Status](https://travis-ci.org/joeyates/ruby-sun-times.png?branch=master)][Continuous Integration]
 
 *Calculates sunrise and sunset times*
 
