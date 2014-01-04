@@ -25,6 +25,7 @@
 
 require 'date'
 
+
 class SunTimes
   DEFAULT_ZENITH = 90.83333
   KNOWN_EVENTS = [:rise, :set]
