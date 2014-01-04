@@ -1,6 +1,16 @@
-# SunTimes
+# ruby-sun-times [![Build Status](https://secure.travis-ci.org/joeyates/ruby-run-times.png)][Continuous Integration]
 
-Calculates sunrise and sunset times.
+*Calculates sunrise and sunset times*
+
+  * [Source Code]
+  * [API documentation]
+  * [Rubygem]
+  * [Continuous Integration]
+
+[Source Code]: https://github.com/joeyates/ruby-sun-times "Source code at GitHub"
+[API documentation]: http://rubydoc.info/gems/ruby-sun-times/frames "RDoc API Documentation at Rubydoc.info"
+[Rubygem]: http://rubygems.org/gems/ruby-sun-times "Ruby gem at rubygems.org"
+[Continuous Integration]: http://travis-ci.org/joeyates/ruby-sun-times "Build status by Travis-CI"
 
 An implementation of the algorithm descibed at http://williams.best.vwh.net/sunrise_sunset_algorithm.htm
 
