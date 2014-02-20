@@ -34,12 +34,12 @@ class SunTimes
 
   # Deprecated: use SunTimes.new.rise(...)
   def self.rise(date, latitude, longitude, options = {})
-    new(options).calculate(:rise, date, latitude, longitude, options)
+    new(options).rise(date, latitude, longitude)
   end
 
   # Deprecated: use SunTimes.new.set(...)
   def self.set(date, latitude, longitude, options = {})
-    new(options).calculate(:set, date, latitude, longitude, options)
+    new(options).set(date, latitude, longitude)
   end
 
   # Deprecated: use SunTimes.new.rise/set(...)

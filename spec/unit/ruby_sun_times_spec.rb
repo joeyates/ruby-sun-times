@@ -5,6 +5,8 @@ describe SunTimes do
   let(:day) { Date.new(2010, 3, 8) }
   let(:latitude) { 43.779 }
   let(:longitude) { 11.432 }
+  let(:set) { Time.gm(2010, 3, 8, 17, 11, 16) }
+  let(:rise) { Time.gm(2010, 3, 8, 5, 39, 53) }
   let(:midsummer) { Date.new(2010, 6, 21) }
   let(:midwinter) { Date.new(2010, 12, 21) }
   let(:north_cape_latitude) { 71.170219 }
@@ -79,9 +81,23 @@ describe SunTimes do
     end
   end
 
-  describe '#rise' do
-    let(:rise) { Time.gm(2010, 3, 8, 5, 39, 53) }
+  # SunTimes.rise is deprecated, use Suntimes.new.set
+  describe '.rise' do
+    it 'returns the sunrise time' do
+      result = described_class.rise(day, latitude, longitude)
+      expect(result).to be_within(1).of(rise)
+    end
+  end
 
+  # SunTimes.set is deprecated, use Suntimes.new.set
+  describe '.set' do
+    it 'returns the sunset time' do
+      result = described_class.set(day, latitude, longitude)
+      expect(result).to be_within(1).of(set)
+    end
+  end
+
+  describe '#rise' do
     it 'returns the sunrise time' do
       result = subject.rise(day, latitude, longitude)
       expect(result).to be_within(1).of(rise)
@@ -97,8 +113,6 @@ describe SunTimes do
   end
 
   describe '#set' do
-    let(:set) { Time.gm(2010, 3, 8, 17, 11, 16) }
-
     it 'returns the sunset time' do
       result = subject.set(day, latitude, longitude)
       expect(result).to be_within(1).of(set)

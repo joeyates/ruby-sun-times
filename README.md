@@ -38,7 +38,7 @@ There are two helper methods: 'rise' and 'set'.
 day = Date.new(2010, 3, 8)
 latitude = 43.779
 longitude = 11.432
-puts SunTimes.set(day, latitude, longitude)
+puts SunTimes.new.set(day, latitude, longitude)
 ```
 
 # References
