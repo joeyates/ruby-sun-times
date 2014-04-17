@@ -20,7 +20,7 @@ An implementation of the algorithm descibed at http://williams.best.vwh.net/sunr
 
 In a Gemfile/Gemspec:
 
-```
+```ruby
 gem 'ruby-sun-times', require: 'sun_times'
 ```
 
@@ -34,7 +34,7 @@ require 'sun_times'
 
 The two methods `rise` and `set` each return a Time.
 
-```
+```ruby
 day = Date.new(2010, 3, 8)
 latitude = 43.779
 longitude = 11.432
