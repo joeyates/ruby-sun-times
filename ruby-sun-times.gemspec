@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.author           = 'Joe Yates'
   s.email            = 'joe.g.yates@gmail.com'
 
-  s.files            = `git ls-files`.split($\)
+  s.files            = `git ls-files -z`.split("\0")
   s.executables      = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   s.test_files       = s.files.grep(%r{^spec/})
   s.require_paths    = ['lib']
