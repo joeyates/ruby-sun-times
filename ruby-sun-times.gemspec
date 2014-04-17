@@ -7,6 +7,7 @@ Gem::Specification.new do |spec|
   spec.name             = 'ruby-sun-times'
   spec.summary          = 'Calculate sunrise and sunset times for a given time and place'
   spec.version          = SunTimes::VERSION::STRING
+  spec.licenses         = ['MIT']
 
   spec.homepage         = 'https://github.com/joeyates/ruby-sun-times'
   spec.author           = 'Joe Yates'
