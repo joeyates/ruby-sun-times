@@ -5,7 +5,7 @@ require 'sun_times/version'
 
 Gem::Specification.new do |s|
   s.name             = 'ruby-sun-times'
-  s.summary          = 'Module which calculates sunrise and sunset times'
+  s.summary          = 'Calculate sunrise and sunset times for a given time and place'
   s.version          = SunTimes::VERSION::STRING
 
   s.homepage         = 'https://github.com/joeyates/ruby-sun-times'
