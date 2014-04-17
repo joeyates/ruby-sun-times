@@ -30,15 +30,17 @@ Directly:
 require 'sun_times'
 ```
 
-## Calls
+## Methods
 
-There are two helper methods: 'rise' and 'set'.
+The two methods `rise` and `set` each return a Time.
 
 ```
 day = Date.new(2010, 3, 8)
 latitude = 43.779
 longitude = 11.432
-puts SunTimes.new.set(day, latitude, longitude)
+sun_times = SunTimes.new
+sun_times.rise(day, latitude, longitude) # => 2010-03-08 05:39:53 UTC
+sun_times.set(day, latitude, longitude) # => 2010-03-08 17:11:16 UTC
 ```
 
 # References
