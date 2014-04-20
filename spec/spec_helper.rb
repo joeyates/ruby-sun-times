@@ -1,5 +1,10 @@
 $LOAD_PATH << File.expand_path('../lib', File.dirname(__FILE__))
 
+if RUBY_VERSION >= '1.9'
+  require 'simplecov'
+  SimpleCov.start
+end
+
 require 'sun_times'
 
 RSpec.configure do |config|

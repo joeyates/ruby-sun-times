@@ -20,4 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rspec'
+  if RUBY_VERSION >= '1.9'
+    spec.add_development_dependency 'simplecov', '~> 0.7.1'
+  end
 end
