@@ -12,7 +12,9 @@
 [Rubygem]: http://rubygems.org/gems/ruby-sun-times "Ruby gem at rubygems.org"
 [Continuous Integration]: http://travis-ci.org/joeyates/ruby-sun-times "Build status by Travis-CI"
 
-An implementation of the algorithm descibed at http://williams.best.vwh.net/sunrise_sunset_algorithm.htm
+The algorithm comes from the [Almanac for computers][almanac-for-computers-1991].
+
+[almanac-for-computers-1991]: http://babel.hathitrust.org/cgi/pt?id=uc1.31822006852784;view=1up;seq=25
 
 # Usage
 
